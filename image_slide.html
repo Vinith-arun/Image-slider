@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Image slider</title>
+        <link href="image_slide_style.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <div class="container">
+            <img id="img" src="" >
+        </div>
+        <div class="thumbnail">
+            <div id="path"></div>
+            <button id="prev" onclick="prev()" >
+            <<!-- <img src="images/prev.png"> -->
+            </button>
+            <img id="1" src="images/1.jpg" onclick="curr_img(this)" class="th_img" value=${0}>
+            <img id="2" src="images/2.jpg" onclick="curr_img(this)" class="th_img" value=${1}>
+            <img id="3" src="images/3.jpg" onclick="curr_img(this)" class="th_img" value=${2]>
+            <img id="4" src="images/4.jpeg" onclick="curr_img(this)" class="th_img" value=${3]>
+            <img id="5" src="images/image.jpg" onclick="curr_img(this)" class="th_img" value=${4]>
+            <button id="next" onclick="next()" >
+                <!-- <img src="images/next.jpeg"> -->>
+            </button>
+        <div id="total"></div>
+        </div>
+        <script>
+            
+            var i=0;
+            var images=[];
+            curr_i=0;
+            images[0]="images/1.jpg";
+            images[1]="images/2.jpg";
+            images[2]="images/3.jpg";
+            images[3]="images/4.jpeg";
+            images[4]="images/image.jpg";
+            document.getElementById("1").src=images[i]
+            document.getElementById("path").innerHTML=images[i].slice(7,images[i].length);
+            document.getElementById("total").innerHTML=i+1+'/'+images.length;
+            document.getElementById("img").src=images[0];
+            function prev() {
+                i=curr_i;
+                if(i>0)
+                {
+                    i=i-1;
+                    curr_i=i;
+                    document.getElementById("prev").style.cursor="default"
+                    document.getElementById("next").style.cursor="default" 
+                }
+                else {
+                    i=0
+                    document.getElementById("prev").style.cursor="not-allowed"
+                }
+                document.getElementById("img").src=images[i]; 
+                 document.getElementById("path").innerHTML=images[i]; 
+                 document.getElementById("total").innerHTML=i+1 +"/"+ images.length ;  
+            }
+            function next() {
+                
+                i=curr_i;
+                if(i<images.length-1)
+                {
+                    i=i+1;
+                    curr_i=i;
+                    document.getElementById("next").style.cursor="default" 
+                    document.getElementById("prev").style.cursor="default"   
+                }
+                else {
+                    console.log("not called")
+                    i=images.length-1;
+                    document.getElementById("next").style.cursor="not-allowed"
+                }
+                document.getElementById("img").src=images[i];  
+                document.getElementById("path").innerHTML=images[i];  
+                document.getElementById("total").innerHTML=i+1 +"/"+ images.length ;  
+            }
+            function curr_img(value){
+                i=0;
+                console.log(value.src)
+                document.getElementById("img").src=value.src
+                for(itr=0;itr<images.length;itr++)
+                {
+                    if(images[itr]==value.src.slice(31,value.src.length)) i=itr;
+                }
+                curr_i=i;
+                document.getElementById("path").innerHTML=images[i].slice(7,images[i].length);
+                document.getElementById("total").innerHTML=i+1+'/'+images.length;
+            }
+        </script>
+    </body>
+</html>
